@@ -2,7 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@nuxtjs/eslint-config-typescript': ^12.0.0
+  '@types/node': ^20.4.5
   '@vitejs/plugin-vue': ^4.2.3
+  '@vue/tsconfig': ^0.4.0
   '@vueuse/core': ^10.3.0
   eslint: ^8.46.0
   typescript: ^5.1.6
@@ -11,14 +13,16 @@ specifiers:
 
 dependencies:
   '@vueuse/core': 10.3.0_vue@3.3.4
+  vue: 3.3.4
 
 devDependencies:
   '@nuxtjs/eslint-config-typescript': 12.0.0_7haavtekmro7ptbnqmctjaodju
+  '@types/node': 20.4.5
   '@vitejs/plugin-vue': 4.2.3_vite@4.4.8+vue@3.3.4
+  '@vue/tsconfig': 0.4.0
   eslint: 8.46.0
   typescript: 5.1.6
-  vite: 4.4.8
-  vue: 3.3.4
+  vite: 4.4.8_@types+node@20.4.5
 
 packages:
 
@@ -405,6 +409,10 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
+  /@types/node/20.4.5:
+    resolution: {integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg==}
+    dev: true
+
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
@@ -554,7 +562,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.4.8
+      vite: 4.4.8_@types+node@20.4.5
       vue: 3.3.4
     dev: true
 
@@ -630,6 +638,10 @@ packages:
 
   /@vue/shared/3.3.4:
     resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
+
+  /@vue/tsconfig/0.4.0:
+    resolution: {integrity: sha512-CPuIReonid9+zOG/CGTT05FXrPYATEqoDGNrEaqS4hwcw5BUNM2FguC0mOwJD4Jr16UpRVl9N0pY3P+srIbqmg==}
+    dev: true
 
   /@vueuse/core/10.3.0_vue@3.3.4:
     resolution: {integrity: sha512-BEM5yxcFKb5btFjTSAFjTu5jmwoW66fyV9uJIP4wUXXU8aR5Hl44gndaaXp7dC5HSObmgbnR2RN+Un1p68Mf5Q==}
@@ -2826,7 +2838,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite/4.4.8:
+  /vite/4.4.8_@types+node@20.4.5:
     resolution: {integrity: sha512-LONawOUUjxQridNWGQlNizfKH89qPigK36XhMI7COMGztz8KNY0JHim7/xDd71CZwGT4HtSRgI7Hy+RlhG0Gvg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -2854,6 +2866,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.4.5
       esbuild: 0.18.17
       postcss: 8.4.27
       rollup: 3.27.0
