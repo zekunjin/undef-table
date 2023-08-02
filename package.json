@@ -1,0 +1,34 @@
+{
+  "name": "undef-table",
+  "version": "0.0.1",
+  "description": "High permormance vue headless table component",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zekunjin/undef-table.git"
+  },
+  "keywords": [
+    "vue",
+    "table",
+    "headless"
+  ],
+  "author": "zekun.jin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zekunjin/undef-table/issues"
+  },
+  "homepage": "https://github.com/zekunjin/undef-table#readme",
+  "dependencies": {
+    "@vueuse/core": "^10.3.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "eslint": "^8.46.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8"
+  }
+}
