@@ -3,8 +3,11 @@ import { useVirtualList } from '@vueuse/core'
 import { calcCssUnit, isFunction } from '../utils/common'
 
 interface TableColumn {
+  align?: 'left' | 'right' | 'center'
   title: string
   dataIndex: string
+  ellipsis?: boolean
+  children: TableColumn[]
 }
 
 interface TableScroll {
