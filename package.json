@@ -1,7 +1,7 @@
 {
   "name": "undef-table",
   "version": "0.0.2",
-  "description": "High permormance vue headless table component",
+  "description": "High performance vue headless table component",
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
