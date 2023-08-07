@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useVirtualList } from '@vueuse/core'
-import { calcCssUnit, isFunction } from '../utils/common'
+import { ref, useSlots } from 'vue'
+import { calcCssUnit } from '../utils/common'
 
 interface TableColumn {
   align?: 'left' | 'right' | 'center'
@@ -8,6 +9,7 @@ interface TableColumn {
   dataIndex: string
   ellipsis?: boolean
   children: TableColumn[]
+  width?: number
 }
 
 interface TableScroll {
@@ -23,32 +25,40 @@ interface TablePagination {
 
 interface Props {
   rowKey: string
-  columns: TableColumn[]
   dataSource: Record<string, any>[]
   scroll: TableScroll | undefined
   pagination: false | TablePagination | undefined
   itemHeight: ((i: number) => number) | number
-  itemWidth: ((i: number) => number) | number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   rowKey: 'key',
-  columns: () => [],
   dataSource: () => [],
-  scroll: () => ({}),
-  itemHeight: 0
+  scroll: () => ({})
 })
+
+const columns = ref<TableColumn[]>([])
+
+const { header, body } = useSlots()
+
+if (header) {
+  const [{ children }] = header()
+  if (Array.isArray(children)) {
+    columns.value = children.map(({ props }: any) => ({
+      align: props?.align || 'left',
+      title: props?.title || props['data-index'],
+      dataIndex: props['data-index'],
+      ellipsis: props?.ellipsis || false,
+      children: props?.children,
+      width: props?.width
+    }))
+  }
+}
 
 const { list, containerProps, wrapperProps } = useVirtualList(props.dataSource, {
   itemHeight: props.itemHeight,
-  itemWidth: props.itemWidth,
   overscan: 10
 })
-
-const calcItemHeight = (index: number) => {
-  if (isFunction(props.itemHeight)) { return props.itemHeight(index) }
-  return calcCssUnit(props.itemHeight)
-}
 </script>
 
 <template>
@@ -57,18 +67,12 @@ const calcItemHeight = (index: number) => {
       <div
         :style="{
           display: 'grid',
-          gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))`
+          gridTemplateColumns: columns.map(({ width }) => width ? calcCssUnit(width) :'auto').join(' ')
         }"
       >
-        <div v-for="col in columns" :key="col.dataIndex" :style="{ position: 'sticky', top: 0 }">
-          {{ col.title }}
-        </div>
+        <slot name="header" />
 
-        <template v-for="{ data, index } in list" :key="data.key">
-          <div v-for="({ dataIndex }) in columns" :key="data[dataIndex]" :style="{ height: calcItemHeight(index) }">
-            {{ data[dataIndex] }}
-          </div>
-        </template>
+        <slot name="body" v-bind="{ rows: list || [], cols: columns || [] }" />
       </div>
     </div>
   </div>
