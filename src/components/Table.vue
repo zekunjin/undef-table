@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { useVirtualList } from '@vueuse/core'
 import { ref, useSlots } from 'vue'
+import { useVirtualList } from '@vueuse/core'
+import { camelCase } from 'scule'
 import { calcCssUnit } from '../utils/common'
 
 interface TableColumn {
   align?: 'left' | 'right' | 'center'
-  title: string
   dataIndex: string
   ellipsis?: boolean
-  children: TableColumn[]
+  children?: TableColumn[]
   width?: number
+  fixed?: 'left' | 'right' | undefined
 }
 
 interface TableScroll {
@@ -39,20 +40,22 @@ const props = withDefaults(defineProps<Props>(), {
 
 const columns = ref<TableColumn[]>([])
 
-const { header, body } = useSlots()
+const { header } = useSlots()
 
 if (header) {
-  const [{ children }] = header()
-  if (Array.isArray(children)) {
-    columns.value = children.map(({ props }: any) => ({
-      align: props?.align || 'left',
-      title: props?.title || props['data-index'],
-      dataIndex: props['data-index'],
-      ellipsis: props?.ellipsis || false,
-      children: props?.children,
-      width: props?.width
-    }))
-  }
+  let colSlots = header()
+  const [{ children }] = colSlots
+  if (Array.isArray(children)) { colSlots = children as any }
+  columns.value = colSlots.map(({ props }: any) => {
+    const defaultProps = { align: 'left', dataIndex: '' }
+    const dynamicProps: any = {}
+
+    Object.entries(props).forEach(([key, value]) => {
+      dynamicProps[camelCase(key)] = value
+    })
+
+    return { ...defaultProps, ...dynamicProps }
+  })
 }
 
 const { list, containerProps, wrapperProps } = useVirtualList(props.dataSource, {
@@ -62,7 +65,7 @@ const { list, containerProps, wrapperProps } = useVirtualList(props.dataSource, 
 </script>
 
 <template>
-  <div v-bind="containerProps" :style="{ height: calcCssUnit(scroll?.y) }">
+  <div v-bind="containerProps" :style="{ width: calcCssUnit(scroll?.x), height: calcCssUnit(scroll?.y) }">
     <div v-bind="wrapperProps">
       <div
         :style="{
@@ -72,7 +75,7 @@ const { list, containerProps, wrapperProps } = useVirtualList(props.dataSource, 
       >
         <slot name="header" />
 
-        <slot name="body" v-bind="{ rows: list || [], cols: columns || [] }" />
+        <slot name="body" v-bind="{ rows: list, cols: columns }" />
       </div>
     </div>
   </div>

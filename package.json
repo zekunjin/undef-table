@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "High permormance vue headless table component",
   "main": "./dist/index.mjs",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
@@ -33,6 +35,7 @@
   "homepage": "https://github.com/zekunjin/undef-table#readme",
   "dependencies": {
     "@vueuse/core": "^10.3.0",
+    "scule": "^1.0.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {

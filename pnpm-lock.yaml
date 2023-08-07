@@ -7,12 +7,14 @@ specifiers:
   '@vue/tsconfig': ^0.4.0
   '@vueuse/core': ^10.3.0
   eslint: ^8.46.0
+  scule: ^1.0.0
   typescript: ^5.1.6
   vite: ^4.4.8
   vue: ^3.3.4
 
 dependencies:
   '@vueuse/core': 10.3.0_vue@3.3.4
+  scule: 1.0.0
   vue: 3.3.4
 
 devDependencies:
@@ -2524,6 +2526,10 @@ packages:
     dependencies:
       regexp-tree: 0.1.27
     dev: true
+
+  /scule/1.0.0:
+    resolution: {integrity: sha512-4AsO/FrViE/iDNEPaAQlb77tf0csuq27EsVpy6ett584EcRTp6pTDLoGWVxCD77y5iU5FauOvhsI4o1APwPoSQ==}
+    dev: false
 
   /semver/5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
