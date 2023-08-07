@@ -31,12 +31,12 @@ const rowStyle = computed(() => (attrs?.style || {}))
     v-for="({ dataIndex, fixed }) in cols"
     :key="row[dataIndex]"
     :style="{
-      ...rowStyle,
       height: calcCssUnit(height),
       position: fixed ? 'sticky' : 'static',
       zIndex: fixed ? '9' : 'auto',
       right: isFixedRight(fixed) ? '0' : 'auto',
-      left: isFixedLeft(fixed) ? '0' : 'auto'
+      left: isFixedLeft(fixed) ? '0' : 'auto',
+      ...rowStyle
     }"
   >
     {{ row[dataIndex] }}
