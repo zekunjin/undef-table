@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, useSlots } from 'vue'
-import { useVirtualList } from '@vueuse/core'
+import { ref, useSlots, watch } from 'vue'
+import { useScroll, useVModel, useVirtualList } from '@vueuse/core'
 import { camelCase } from 'scule'
 import { calcCssUnit } from '../utils/common'
 
@@ -30,13 +30,19 @@ interface Props {
   scroll: TableScroll | undefined
   pagination: false | TablePagination | undefined
   itemHeight: ((i: number) => number) | number
+  arrivedLeft?: boolean
+  arrivedRight?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   rowKey: 'key',
   dataSource: () => [],
-  scroll: () => ({})
+  scroll: () => ({}),
+  arrivedLeft: false,
+  arrivedRight: false
 })
+
+const emit = defineEmits(['update:arrivedLeft', 'update:arrivedRight'])
 
 const columns = ref<TableColumn[]>([])
 
@@ -62,6 +68,15 @@ const { list, containerProps, wrapperProps } = useVirtualList(props.dataSource, 
   itemHeight: props.itemHeight,
   overscan: 10
 })
+
+const arrivedLeft = useVModel(props, 'arrivedLeft', emit)
+const arrivedRight = useVModel(props, 'arrivedRight', emit)
+const { arrivedState } = useScroll(containerProps.ref)
+
+watch(arrivedState, ({ left, right }) => {
+  arrivedLeft.value = left
+  arrivedRight.value = right
+}, { immediate: true })
 </script>
 
 <template>
