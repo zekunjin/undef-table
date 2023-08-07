@@ -27,18 +27,20 @@ const rowStyle = computed(() => (attrs?.style || {}))
 </script>
 
 <template>
-  <div
-    v-for="({ dataIndex, fixed }) in cols"
-    :key="row[dataIndex]"
-    :style="{
-      height: calcCssUnit(height),
-      position: fixed ? 'sticky' : 'static',
-      zIndex: fixed ? '9' : 'auto',
-      right: isFixedRight(fixed) ? '0' : 'auto',
-      left: isFixedLeft(fixed) ? '0' : 'auto',
-      ...rowStyle
-    }"
-  >
-    {{ row[dataIndex] }}
-  </div>
+  <slot v-bind="{ cols }">
+    <div
+      v-for="({ dataIndex, fixed }) in cols"
+      :key="row[dataIndex]"
+      :style="{
+        height: calcCssUnit(height),
+        position: fixed ? 'sticky' : 'static',
+        zIndex: fixed ? '9' : 'auto',
+        right: isFixedRight(fixed) ? '0' : 'auto',
+        left: isFixedLeft(fixed) ? '0' : 'auto',
+        ...rowStyle
+      }"
+    >
+      {{ row[dataIndex] }}
+    </div>
+  </slot>
 </template>
