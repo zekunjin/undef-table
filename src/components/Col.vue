@@ -1,17 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { TableColumn } from '../types'
 
-interface Props {
-  align?: 'left' | 'right' | 'center'
-  title: string
-  dataIndex: string
-  ellipsis?: boolean
-  children?: Props[]
-  width?: number | string | undefined
-  fixed?: 'left' | 'right' | undefined
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<TableColumn>(), {
   align: 'left',
   width: 'auto',
   children: undefined,

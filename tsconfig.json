@@ -15,12 +15,12 @@
     "resolveJsonModule": true,
     "rootDir": ".",
     "baseUrl": ".",
-    "paths": { "~": ["./src"] },
+    "paths": { "~/": ["./src/"] },
     "jsx": "preserve",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "noUnusedLocals": true
   },
-  "include": ["src/**/*", "types.d.ts", "vite.config.ts"],
+  "include": ["src/**/*", "vite.config.ts"],
   "exclude": ["node_modules", "**/dist"]
 }

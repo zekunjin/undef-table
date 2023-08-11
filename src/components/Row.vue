@@ -1,16 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import { calcCssUnit } from '../utils/common'
-
-interface TableColumn {
-  align?: 'left' | 'right' | 'center'
-  title: string
-  dataIndex: string
-  ellipsis?: boolean
-  children: TableColumn[]
-  width?: number
-  fixed?: 'left' | 'right' | undefined
-}
+import type { TableColumn } from '../types'
 
 defineProps<{
   row: Record<string, any>

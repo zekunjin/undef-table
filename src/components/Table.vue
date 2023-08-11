@@ -2,16 +2,8 @@
 import { ref, useSlots, watch } from 'vue'
 import { useScroll, useVModel, useVirtualList } from '@vueuse/core'
 import { camelCase } from 'scule'
+import type { TableColumn } from '../types'
 import { calcCssUnit } from '../utils/common'
-
-interface TableColumn {
-  align?: 'left' | 'right' | 'center'
-  dataIndex: string
-  ellipsis?: boolean
-  children?: TableColumn[]
-  width?: number
-  fixed?: 'left' | 'right' | undefined
-}
 
 interface TableScroll {
   x?: string | number
