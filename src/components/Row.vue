@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import { calcCssUnit } from '../utils/common'
 import type { TableColumn } from '../types'
+import { UndefCell } from '..'
 
 defineProps<{
   row: Record<string, any>
@@ -11,27 +11,19 @@ defineProps<{
 
 const attrs = useAttrs()
 
-const isFixedRight = (fixed?: 'left' | 'right') => fixed === 'right'
-const isFixedLeft = (fixed?: 'left' | 'right') => fixed === 'left'
-
 const rowStyle = computed(() => (attrs?.style || {}))
 </script>
 
 <template>
   <slot v-bind="{ cols }">
-    <div
+    <UndefCell
       v-for="({ dataIndex, fixed }) in cols"
       :key="row[dataIndex]"
-      :style="{
-        height: calcCssUnit(height),
-        position: fixed ? 'sticky' : 'static',
-        zIndex: fixed ? '9' : 'auto',
-        right: isFixedRight(fixed) ? '0' : 'auto',
-        left: isFixedLeft(fixed) ? '0' : 'auto',
-        ...rowStyle
-      }"
+      :fixed="fixed"
+      :height="height"
+      :style="rowStyle"
     >
       {{ row[dataIndex] }}
-    </div>
+    </UndefCell>
   </slot>
 </template>
