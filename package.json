@@ -1,6 +1,6 @@
 {
   "name": "undef-table",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "High performance vue headless table component",
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -10,6 +10,7 @@
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.umd.js"
     }
